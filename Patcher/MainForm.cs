@@ -12,7 +12,7 @@ namespace Patcher
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        public MainForm(AppConfig config)
         {
             InitializeComponent();
         }
