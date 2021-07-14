@@ -6,13 +6,13 @@ using System.Windows.Forms;
 
 namespace Patcher
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static int Main()
+        private static int Main()
         {
             // https://docs.microsoft.com/ko-kr/dotnet/csharp/language-reference/proposals/csharp-7.1/async-main
             return MainAsync().GetAwaiter().GetResult();

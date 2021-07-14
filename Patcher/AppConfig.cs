@@ -10,17 +10,20 @@ namespace Patcher
         ///     source of <see cref="VersionInfo"/>
         /// </summary>
         public string VersionJsonUrl { get; set; }
+
         public string Title { get; set; }
 
 #if DEBUG
+
         public static Task<AppConfig> LoadAsync(string filePath)
         {
             return Task.FromResult(new AppConfig
             {
-                VersionJsonUrl = "https://drive.google.com/file/d/1bN-40BzKpGv2O81tT6otvTn_vRtsHxCT",
+                VersionJsonUrl = "https://www.skia.site/downloads/marsp/mars.version.json",
                 Title = "Debugging",
             });
         }
+
 #else
         public static async Task<AppConfig> LoadAsync(string filePath)
         {
@@ -38,6 +41,8 @@ namespace Patcher
 
         public static async Task<VersionInfo> LoadAsync(string filePath)
         {
+            if (File.Exists(filePath) == false) return null;
+
             var file = File.Open(filePath, FileMode.Open);
             return await JsonSerializer.DeserializeAsync<VersionInfo>(file);
         }
