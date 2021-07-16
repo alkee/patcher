@@ -13,24 +13,11 @@ namespace Patcher
 
         public string Title { get; set; }
 
-#if DEBUG
-
-        public static Task<AppConfig> LoadAsync(string filePath)
-        {
-            return Task.FromResult(new AppConfig
-            {
-                VersionJsonUrl = "https://www.skia.site/downloads/marsp/mars.version.json",
-                Title = "Debugging",
-            });
-        }
-
-#else
         public static async Task<AppConfig> LoadAsync(string filePath)
         {
             var file = File.Open(filePath, FileMode.Open);
             return await JsonSerializer.DeserializeAsync<AppConfig>(file);
         }
-#endif
     }
 
     public class VersionInfo
