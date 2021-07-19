@@ -19,7 +19,7 @@ windows application updater
 }
 ```
 
-4. 실행파일과 같은이름으로 [설정 파일 - AppConfig](https://github.com/alkee/patcher/blob/748d5b32bdedcc03d1cd32eeefd5541b6a19af7d/Patcher/AppConfig.cs#L7))
+4. 실행파일과 같은이름으로 [설정 파일(AppConfig)](https://github.com/alkee/patcher/blob/748d5b32bdedcc03d1cd32eeefd5541b6a19af7d/Patcher/AppConfig.cs#L7)
 을 준비 (예 - `patcher.config`)
 
 ```json
