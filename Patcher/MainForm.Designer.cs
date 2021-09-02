@@ -61,6 +61,8 @@ namespace Patcher
             this.ControlBox = false;
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.progressBar);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

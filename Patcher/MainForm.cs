@@ -46,7 +46,7 @@ namespace Patcher
                 var packageFileName = Path.GetFileName(newVersion.PackageUrl);
                 response = await Downloader.HttpDownload(newVersion.PackageUrl, packageFileName);
                 statusLabel.Text = $"Installing package...";
-                await Task.Run(() => { System.IO.Compression.ZipFile.ExtractToDirectory(packageFileName, "."); });
+                await Task.Run(() => { System.IO.Compression.ZipFile.ExtractToDirectory(packageFileName, ".", true); });
                 File.Move(tmpFileName, versionFileName, true);
                 statusLabel.Text = $"Running...";
                 await Task.Delay(2000);
