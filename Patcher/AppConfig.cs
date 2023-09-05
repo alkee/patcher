@@ -25,6 +25,7 @@ namespace Patcher
         public string Version { get; set; }
         public string PackageUrl { get; set; }
         public string ExecuteFilePath { get; set; }
+        public string Arguments { get; set; }
 
         public static async Task<VersionInfo> LoadAsync(string filePath)
         {
