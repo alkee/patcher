@@ -33,7 +33,14 @@ namespace Patcher
 
         public static Process GetParent(this Process process)
         {
-            return FindPidFromIndexedProcessName(FindIndexedProcessName(process.Id));
+            try
+            {
+                return FindPidFromIndexedProcessName(FindIndexedProcessName(process.Id));
+            }
+            catch(System.Exception)
+            {
+                return null;
+            }
         }
 
 
