@@ -15,7 +15,8 @@ windows application updater
 {
 	"Version": "1.0.0.1",
 	"PackageUrl": "https://host.sample/downlaod/SamplePackage.zip",
-	"ExecuteFilePath": "sample.exe"
+	"ExecuteFilePath": "sample.exe",
+        "Arguments": "sample args"
 }
 ```
 
@@ -30,3 +31,45 @@ windows application updater
 ```
 
 5. 패치 실행파일(`patcher.exe`)과 설정파일(`patcher.config`)을 같은 경로에 두고 실행한다.
+
+
+## 추가 정보
+
+### 동작 flow
+
+```mermaid
+flowchart TD
+    PREPARE["patcher.config 에서 서버정보 확인"]
+    CHECK_VERSION["version.json 확인\n(서버와 로컬 정보 비교)\n파일이 없으면 항상 오래된 버전이라고 판단"]
+    IF_NEW{"최신버전"}
+    RUN["version.json 정보 기반 실행"]
+    DOWNLOAD[".zip 다운로드 및 압축해제"]
+    UPDATE_VERSION["version.json 정보 업데이트"]
+
+    subgraph "버전확인"
+        PREPARE-->CHECK_VERSION
+    end
+
+    CHECK_VERSION --> IF_NEW
+    IF_NEW -- "Yes" --> RUN
+    IF_NEW -- "No" --> DOWNLOAD
+    DOWNLOAD --> UPDATE_VERSION
+
+    UPDATE_VERSION --> RUN
+```
+
+### patch 과정
+
+```mermaid
+sequenceDiagram
+    participant Patcher
+    participant Server
+
+    note over Patcher: patcher.config 로드
+    note over Patcher: local VersionInfo(version.json) 로드
+    Patcher -->> Server: VersionInfo(version.json)요청
+    note over Patcher: VersionInfo.Version 정보확인
+    Patcher -->> Server: VersionInfo.PackageUrl 파일 다운로드
+    note over Patcher: 압축해제
+    note over Patcher: VersionInfo.ExecuteFilePath + <br> Arguments 실행
+```
